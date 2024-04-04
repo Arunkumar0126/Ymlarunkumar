@@ -1,0 +1,36 @@
+trigger:
+- task: GitHubComment@0
+  inputs:
+    gitHubConnection: 'Arunkumar0126'
+    repositoryName: 'asd'
+- main  # Trigger the pipeline on changes to the main branch
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Building application..."
+      displayName: 'Build'
+
+- stage: Test
+  jobs:
+  - job: UnitTest
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Running unit tests..."
+      displayName: 'Unit Tests'
+
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Deploying application..."
+      displayName: 'Deploy'
+
+stage: release 
